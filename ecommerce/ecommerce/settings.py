@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'store',
     'orders',
     'carts',
+    'account',
     'graphene_django',
 ]
 
@@ -87,6 +88,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# AUTH_USER_MODEL = 'account.ExtendUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -102,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
@@ -130,5 +133,20 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 GRAPHENE = {
-    "SCHEMA":"ecommerce.schema.schema"
+    "SCHEMA":"ecommerce.schema.schema",
+    "MIDDLEWARE": ["graphql_jwt.middleware.JSONWebTokenMiddleware",],
 }
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# GRAPHQL_JWT = {
+#     "JWT_ALLOW_ANY_CLASSES" :[
+#         "graphql_auth.mutations.VerifyAccount",
+#         "graphql_auth.mutations.ObtainJSONWebToken",
+#         "graphql_auth.mutations.RefreshAccount"
+#     ],
+# }
+AUTH_USER_MODEL = 'account.CustomUser'

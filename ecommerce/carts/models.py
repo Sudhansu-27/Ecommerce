@@ -1,10 +1,11 @@
 from django.db import models
 
 from store.models import Product 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.conf import settings
 
 class Cart(models.Model):
-    account = models.OneToOneField(User, related_name='cart', on_delete=models.CASCADE)
+    account = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='cart', on_delete=models.CASCADE)
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)    

@@ -15,13 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-# ]
-
-from django.conf import settings #new
-from django.conf.urls.static import static #new
+from django.conf import settings
+from django.conf.urls.static import static
 from graphene_django.views import GraphQLView
 urlpatterns = [
     path('admin/', admin.site.urls),
